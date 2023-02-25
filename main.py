@@ -8,7 +8,7 @@ from TIpo import Tipo
 def main():
     jokenpo = Jokenpo()
 
-    print("Escolha uma das opções [ 1-PAPEL, 2-TESOURA, 3-PEDRA, LAGARTO-LAGARTO, 5-SPOCK ]\n")
+    # print("Escolha uma das opções [ 1-PAPEL, 2-TESOURA, 3-PEDRA, LAGARTO-LAGARTO, 5-SPOCK ]\n")
     # jogada = int(input())
     computador = random.randint(1, 5)
     print("O COMPUTADOR escolheu:", computador)
