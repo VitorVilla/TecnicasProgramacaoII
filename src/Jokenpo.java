@@ -8,8 +8,8 @@ public class Jokenpo {
         this.algoritmo = algoritmo;
     }
 
-    public void jogar(Tipo ptipo) {
-        Map<String, String> map = algoritmo.executar(ptipo);
+    public void jogar(Tipo pTipo) {
+        Map<String, String> map = algoritmo.executar(pTipo);
         System.out.println(map);
     }
 }

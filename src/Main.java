@@ -1,81 +1,39 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main{
-//    private static int PAPEL = 1;
-//    private static int TESOURA = 2;
-//    private static int PEDRA = 3;
-//    private static int LAGARTO = 4;
-//    private static int SPOCK = 5;
-
+public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         var jokenpo = new Jokenpo();
 
         System.out.println("Escolha uma das opções [ 1-PAPEL, 2-TESOURA, 3-PEDRA, LAGARTO-LAGARTO, 5-SPOCK ]\n");
-//        int jogada = in.nextInt();
+        int jogada = in.nextInt();
         int computador = new Random().nextInt(5) + 1;
-        System.out.println("O COMPUTADOR escolheu: " + computador);
+        System.out.println("O COMPUTADOR escolheu: " + Tipo.getInstance(computador));
 
-        var papel = new Papel();
-        jokenpo.setAlgoritmo(papel);
+        //TODO: Implementar regra para criação do tipo om base na classe Algoritmo
+        var algoritmo = getAlgoritmo(jogada);
 
-        jokenpo.jogar(Tipo.getInstance(computador));
+        jokenpo.setAlgoritmo(algoritmo);
+        Tipo tipoJogadaComputador = Tipo.getInstance(computador);
 
-//        if (jogada == PAPEL && computador == PAPEL) {
-//            System.out.println("Empate. Papel empata com papel!");
-//        } else if (jogada == PAPEL && computador == TESOURA) {
-//            System.out.println("Perdeu! Tesoura corta o papel!");
-//        } else if (jogada == PAPEL && computador == PEDRA) {
-//            System.out.println("Ganhou! Pedra embrulha o papel!");
-//        } else if (jogada == PAPEL && computador == LAGARTO) {
-//            System.out.println("Perdeu! Lagarto come o papel!");
-//        } else if (jogada == PAPEL) {
-//            System.out.println("Ganhou! Papel refuta o Spock!");
-//        } else if (jogada == TESOURA && computador == PAPEL) {
-//            System.out.println("Ganhou. Tesoura corta o papel!");
-//        } else if (jogada == TESOURA && computador == TESOURA) {
-//            System.out.println("Empate! Tesoura empata com tesoura!");
-//        } else if (jogada == TESOURA && computador == PEDRA) {
-//            System.out.println("Perdeu! Pedra quebra a tesoura!");
-//        } else if (jogada == TESOURA && computador == LAGARTO) {
-//            System.out.println("Ganhou! Tesoura decapta o lagarto!");
-//        } else if (jogada == TESOURA) {
-//            System.out.println("Perdeu! Spock derrete a tesoura!");
-//        } else if (jogada == PEDRA && computador == PAPEL) {
-//            System.out.println("Perdeu. Papel embrulha a pedar!");
-//        } else if (jogada == PEDRA && computador == TESOURA) {
-//            System.out.println("Empate! Tesoura empata com tesoura!");
-//        } else if (jogada == PEDRA && computador == PEDRA) {
-//            System.out.println("Empatou! Pedra empata com pedra!");
-//        } else if (jogada == PEDRA && computador == LAGARTO) {
-//            System.out.println("Ganhou! Pedra esmaga o lagarto!");
-//        } else if (jogada == PEDRA) {
-//            System.out.println("Perdeu! Spock vaporiza a apedra!");
-//        } else if (jogada == LAGARTO && computador == PAPEL) {
-//            System.out.println("Ganhou. Lagarto come papel!");
-//        } else if (jogada == LAGARTO && computador == TESOURA) {
-//            System.out.println("Perdeu! Tesoura decapta o lagarto!");
-//        } else if (jogada == LAGARTO && computador == PEDRA) {
-//            System.out.println("Perdeu! Pedra esmaga lagarto!");
-//        } else if (jogada == LAGARTO && computador == LAGARTO) {
-//            System.out.println("Empatou! Lagarto empata com lagarto!");
-//        } else if (jogada == LAGARTO) {
-//            System.out.println("Ganhou! Lagarto envenena o Spock!");
-//        } else if (jogada == SPOCK && computador == PAPEL) {
-//            System.out.println("Perdeu. Papel refuta Spock!");
-//        } else if (jogada == SPOCK && computador == TESOURA) {
-//            System.out.println("Ganhou! Spock derrete a tesoura!");
-//        } else if (jogada == SPOCK && computador == PEDRA) {
-//            System.out.println("Ganhou! Spock vaporiza a pedra!");
-//        } else if (jogada == SPOCK && computador == LAGARTO) {
-//            System.out.println("Perdeu! Lagarto envenena Spock!");
-//        } else if (jogada == SPOCK) {
-//            System.out.println("Empatou! Spock empata com Spock!");
-//        }
+        jokenpo.jogar(tipoJogadaComputador);
 
         in.close();
 
+    }
+
+    private static Algoritmo getAlgoritmo(Integer pId) {
+        Algoritmo algoritmo = null;
+        switch (pId) {
+            case 1 -> algoritmo = new Papel();
+            case 2 -> algoritmo = new Tesoura(); //TODO: Implementar a classe Tesoura
+            case 3 -> algoritmo = new Pedra(); //TODO: Implementar a classe Pedra
+            case 4 -> algoritmo = new Spock(); //TODO: Implementar a classe Lagarto
+            case 5 -> algoritmo = new Lagarto(); //TODO: Implementar a classe Spock
+            default -> throw new IllegalStateException("Unexpected value: " + pId);
+        }
+        return algoritmo;
     }
 }
